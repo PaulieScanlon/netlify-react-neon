@@ -1,3 +1,4 @@
-[[edge_functions]]
-function = "test"
-path = "/test"
+[dev]
+  command = "npm run dev"
+  port = 8888
+  targetPort = 5173
