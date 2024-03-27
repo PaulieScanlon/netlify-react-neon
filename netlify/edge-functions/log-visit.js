@@ -9,13 +9,10 @@ export default async function handler(request, context) {
 
   const sql = neon(Netlify.env.get('DATABASE_URL'));
 
-  await sql('INSERT INTO visitors (date, city, country, latitude, longitude) VALUES ($1, $2, $3, $4, $5)', [
-    date,
-    city,
-    country.name,
-    latitude,
-    longitude,
-  ]);
+  await sql`
+    INSERT INTO visitors (date, city, country, latitude, longitude)
+    VALUES (${date}, ${city}, ${country.name}, ${latitude}, ${longitude})
+  `;
 
   return new Response(
     JSON.stringify({ message: 'A-Ok!', date, city, country: country.name, latitude, longitude }, null, 2),
