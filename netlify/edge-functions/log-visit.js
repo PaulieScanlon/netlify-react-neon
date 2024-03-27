@@ -1,8 +1,9 @@
 import { neon } from '@neondatabase/serverless';
 
 export default async function handler(request, context) {
-  const sql = neon(Netlify.env.get('DATABASE_URL'));
   const { date } = await request.json();
+
+  const sql = neon(Netlify.env.get('DATABASE_URL'));
 
   const {
     geo: { city, country, latitude, longitude },
