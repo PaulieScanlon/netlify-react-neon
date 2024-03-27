@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const GetVisits = () => {
   const [visitors, setVisitors] = useState([]);
+  const isMountedRef = useRef(false);
 
   useEffect(() => {
     const getVisits = async () => {
@@ -17,7 +18,10 @@ const GetVisits = () => {
       }
     };
 
-    getVisits();
+    if (!isMountedRef.current) {
+      isMountedRef.current = true;
+      getVisits();
+    }
   }, []);
 
   return (

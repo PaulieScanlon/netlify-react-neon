@@ -3,11 +3,11 @@ import { neon } from '@neondatabase/serverless';
 export default async function handler(request, context) {
   const { date } = await request.json();
 
-  const sql = neon(Netlify.env.get('DATABASE_URL'));
-
   const {
     geo: { city, country, latitude, longitude },
   } = context;
+
+  const sql = neon(Netlify.env.get('DATABASE_URL'));
 
   await sql('INSERT INTO visitors (date, city, country, latitude, longitude) VALUES ($1, $2, $3, $4, $5)', [
     date,
