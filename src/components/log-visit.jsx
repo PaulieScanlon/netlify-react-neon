@@ -4,7 +4,7 @@ const LogVisit = () => {
   const [visitor, setVisitor] = useState();
 
   useEffect(() => {
-    const initVisit = async () => {
+    const logVisit = async () => {
       try {
         const response = await fetch('/log-visit', {
           method: 'POST',
@@ -22,7 +22,7 @@ const LogVisit = () => {
       }
     };
 
-    initVisit();
+    logVisit();
   }, []);
 
   return <code>{JSON.stringify(visitor, null, 2)}</code>;
