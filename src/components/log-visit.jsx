@@ -1,8 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 const LogVisit = () => {
-  const isMountedRef = useRef(false);
-
   useEffect(() => {
     const logVisit = async () => {
       try {
@@ -19,11 +17,7 @@ const LogVisit = () => {
         console.error(error);
       }
     };
-
-    if (!isMountedRef.current) {
-      isMountedRef.current = true;
-      logVisit();
-    }
+    logVisit();
   }, []);
 
   return null;

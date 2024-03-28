@@ -9,18 +9,25 @@ export default async function handler(request, context) {
 
   const sql = neon(Netlify.env.get('DATABASE_URL'));
 
-  await sql`
+  try {
+    await sql`
     INSERT INTO visitors (date, city, country, latitude, longitude)
     VALUES (${date}, ${city}, ${country.name}, ${latitude}, ${longitude})
   `;
 
-  return new Response(
-    JSON.stringify({ message: 'A-Ok!', date, city, country: country.name, latitude, longitude }, null, 2),
-    {
-      status: 200,
+    return new Response(
+      JSON.stringify({ message: 'A-Ok!', date, city, country: country.name, latitude, longitude }, null, 2),
+      {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      }
+    );
+  } catch (error) {
+    return new Response({
+      status: 500,
       headers: { 'content-type': 'application/json' },
-    }
-  );
+    });
+  }
 }
 
 export const config = { path: '/log-visit' };
