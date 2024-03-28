@@ -1,7 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const LogVisit = () => {
-  const [visitor, setVisitor] = useState();
   const isMountedRef = useRef(false);
 
   useEffect(() => {
@@ -15,9 +14,7 @@ const LogVisit = () => {
         if (!response.ok) {
           throw new Error('Bad response');
         }
-
-        const json = await response.json();
-        setVisitor(json);
+        console.log(await response.json());
       } catch (error) {
         console.error(error);
       }
@@ -29,7 +26,7 @@ const LogVisit = () => {
     }
   }, []);
 
-  return <code>{JSON.stringify(visitor, null, 2)}</code>;
+  return null;
 };
 
 export default LogVisit;
