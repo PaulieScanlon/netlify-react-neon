@@ -5,7 +5,6 @@ function App() {
   return (
     <>
       <LogVisit />
-      <h1>Last 5 visits</h1>
       <GetVisits />
     </>
   );
